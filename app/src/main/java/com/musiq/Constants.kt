@@ -1,6 +1,8 @@
 package com.musiq
 
 object Constants {
+    const val XSPF_FILEPATH: String = "xspf_filepath"
+
     const val ARTIST_NAME: String = "artist_name"
     const val ALBUM_NAME: String = "album_name"
     const val TRACK_NAME: String = "track_name"

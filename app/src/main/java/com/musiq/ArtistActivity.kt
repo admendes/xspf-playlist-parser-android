@@ -1,6 +1,7 @@
 package com.musiq
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -19,10 +20,12 @@ class ArtistActivity : AppCompatActivity(), ItemAdapter.OnItemClickListener {
     //private var parsedList : ArrayList<Artist>? = ArrayList()
     private var parsedMap : LinkedHashMap<String, Artist>? = LinkedHashMap()
     //internal lateinit var db: DBHelper
+    private var xspfFilepath : String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_artist)
+        xspfFilepath = intent.getStringExtra(Constants.XSPF_FILEPATH)
 
         et_search_artist.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(
@@ -54,7 +57,8 @@ class ArtistActivity : AppCompatActivity(), ItemAdapter.OnItemClickListener {
         try {
             pullParserFactory = XmlPullParserFactory.newInstance()
             val parser = pullParserFactory.newPullParser()
-            val inputStream = applicationContext.assets.open("all.xml")
+            val inputStream = contentResolver.openInputStream(Uri.parse(xspfFilepath))
+
             parser.setFeature(XmlPullParser.FEATURE_PROCESS_NAMESPACES, false)
             parser.setInput(inputStream, null)
 
@@ -98,6 +102,7 @@ class ArtistActivity : AppCompatActivity(), ItemAdapter.OnItemClickListener {
         var albumName: String = ""
         var changedArtist: Boolean = true
         var changedAlbum: Boolean = true
+        parser.next()
 
         while (eventType != XmlPullParser.END_DOCUMENT) {
             val name: String
@@ -105,6 +110,7 @@ class ArtistActivity : AppCompatActivity(), ItemAdapter.OnItemClickListener {
                 XmlPullParser.START_DOCUMENT -> artists = LinkedHashMap()
                 XmlPullParser.START_TAG -> {
                     name = parser.name
+
 
                     if (name == "track") {
                         track = Track()

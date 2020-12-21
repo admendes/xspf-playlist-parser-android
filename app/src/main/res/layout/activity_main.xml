@@ -34,31 +34,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Please enter your name"
+                android:text="Please select a .xspf file"
                 android:textColor="#7A8089"
                 android:textSize="16sp">
             </TextView>
-            <com.google.android.material.textfield.TextInputLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-                <androidx.appcompat.widget.AppCompatEditText
-                    android:id="@+id/et_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:hint="Name"
-                    android:textColor="#363A43"
-                    android:textColorHint="#7A8089">
-                </androidx.appcompat.widget.AppCompatEditText>
-            </com.google.android.material.textfield.TextInputLayout>
             <Button
-                android:id="@+id/btn_start"
+                android:id="@+id/btn_upload"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:background="@color/colorPrimary"
-                android:text="NEXT"
+                android:text="CHOOSE FILE"
                 android:textSize="16sp"
                 android:textColor="@android:color/white">
             </Button>
